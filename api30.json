@@ -1,0 +1,358 @@
+{
+ "openapi": "3.0.1",
+ "info": {
+  "title": "ContratoManutencao",
+  "description": "API referente às funcionalidade de manutenção de um contrato",
+  "version": "0.1.0"
+ },
+ "servers": [
+  {
+   "url": "/"
+  }
+ ],
+ "security": [
+  {
+   "default": []
+  }
+ ],
+ "paths": {
+  "/ins": {
+   "post": {
+    "summary": "Insere a manutenção para o contrato",
+    "description": "Insere a manutenção para o contrato",
+    "parameters": [
+     {
+      "name": "idContrato",
+      "in": "query",
+      "description": "Identificador do contrato",
+      "required": false,
+      "style": "form",
+      "explode": true,
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "dsContratoAntes",
+      "in": "query",
+      "description": "Informações do contrato antes de ser alterado",
+      "required": false,
+      "style": "form",
+      "explode": true,
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "dsContratoDepois",
+      "in": "query",
+      "description": "Informações do contrato após de ser alterado",
+      "required": false,
+      "style": "form",
+      "explode": true,
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "dtCorte",
+      "in": "query",
+      "description": "Data de aplicação das alterações",
+      "required": false,
+      "style": "form",
+      "explode": true,
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Mensagem sucesso",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "message": {
+           "type": "string"
+          }
+         }
+        }
+       }
+      }
+     },
+     "default": {
+      "description": "Mensagem padrão",
+      "content": {
+       "application/json": {
+        "schema": {
+         "required": [
+          "msg",
+          "status"
+         ],
+         "type": "object",
+         "properties": {
+          "msg": {
+           "type": "string"
+          },
+          "status": {
+           "type": "integer",
+           "format": "int32"
+          }
+         }
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "default": [
+       "ctmt_geral"
+      ]
+     }
+    ],
+    "x-auth-type": "Application User",
+    "x-throttling-tier": "Unlimited"
+   }
+  },
+  "/lst": {
+   "get": {
+    "summary": "Lista as manutenções de um contrato.",
+    "description": "Lista as manutenções de um contrato.",
+    "parameters": [
+     {
+      "name": "idContrato",
+      "in": "query",
+      "description": "Identificador do contrato",
+      "required": false,
+      "style": "form",
+      "explode": true,
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "orderBy",
+      "in": "query",
+      "description": "Ordem de listagem",
+      "required": false,
+      "style": "form",
+      "explode": true,
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "pagIni",
+      "in": "query",
+      "description": "Pagina inicial da listagem",
+      "required": false,
+      "style": "form",
+      "explode": true,
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "pagTam",
+      "in": "query",
+      "description": "Numero de itens na listagem",
+      "required": false,
+      "style": "form",
+      "explode": true,
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Mensagem de sucesso",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "numLines": {
+           "type": "integer",
+           "format": "int64"
+          },
+          "lines": {
+           "type": "array",
+           "items": {
+            "type": "object"
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "default": {
+      "description": "Mensagem padrão",
+      "content": {
+       "application/json": {
+        "schema": {
+         "required": [
+          "code",
+          "message"
+         ],
+         "type": "object",
+         "properties": {
+          "code": {
+           "type": "integer",
+           "format": "int32"
+          },
+          "description": {
+           "type": "string"
+          },
+          "message": {
+           "type": "string"
+          }
+         }
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "default": [
+       "ctmt_geral"
+      ]
+     }
+    ],
+    "x-auth-type": "Application User",
+    "x-throttling-tier": "Unlimited"
+   }
+  },
+  "/getByPk": {
+   "get": {
+    "summary": "Detalha a manutenção de um contrato.",
+    "description": "Detalha a manutenção de um contrato.",
+    "parameters": [
+     {
+      "name": "idContratoManutencao",
+      "in": "query",
+      "description": "Identificador da manutenção do contrato",
+      "required": false,
+      "style": "form",
+      "explode": true,
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Mensagem sucesso",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "message": {
+           "type": "string"
+          }
+         }
+        }
+       }
+      }
+     },
+     "default": {
+      "description": "Mensagem padrão",
+      "content": {
+       "application/json": {
+        "schema": {
+         "required": [
+          "msg",
+          "status"
+         ],
+         "type": "object",
+         "properties": {
+          "msg": {
+           "type": "string"
+          },
+          "status": {
+           "type": "integer",
+           "format": "int32"
+          }
+         }
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "default": [
+       "ctmt_geral"
+      ]
+     }
+    ],
+    "x-auth-type": "Application User",
+    "x-throttling-tier": "Unlimited"
+   }
+  }
+ },
+ "components": {
+  "securitySchemes": {
+   "default": {
+    "type": "oauth2",
+    "flows": {
+     "implicit": {
+      "authorizationUrl": "https://test.com",
+      "scopes": {
+       "ctmt_geral": "Manutenção dos contratos"
+      },
+      "x-scopes-bindings": {
+       "ctmt_geral": "SIAF/sigimov_manter_contrato"
+      }
+     }
+    }
+   }
+  }
+ },
+ "x-wso2-auth-header": "Authorization",
+ "x-throttling-tier": "Unlimited",
+ "x-wso2-cors": {
+  "corsConfigurationEnabled": true,
+  "accessControlAllowOrigins": [
+   "*"
+  ],
+  "accessControlAllowCredentials": false,
+  "accessControlAllowHeaders": [
+   "authorization",
+   "Access-Control-Allow-Origin",
+   "Content-Type",
+   "SOAPAction"
+  ],
+  "accessControlAllowMethods": [
+   "GET",
+   "PUT",
+   "POST",
+   "DELETE",
+   "PATCH",
+   "OPTIONS"
+  ]
+ },
+ "x-wso2-production-endpoints": {
+  "urls": [
+   "http://tomcat-dev.softvision.local/executor-siaf/contratoManutencao"
+  ],
+  "type": "http"
+ },
+ "x-wso2-sandbox-endpoints": {
+  "urls": [
+   "http://tomcat-dev.softvision.local/executor-siaf/contratoManutencao"
+  ],
+  "type": "http"
+ },
+ "x-wso2-basePath": "/contratomanutencao/0.1.0",
+ "x-wso2-transports": [
+  "http",
+  "https"
+ ]
+}
